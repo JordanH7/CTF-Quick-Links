@@ -62,10 +62,12 @@
     </div>
 
     <script>
-        // The actual redirect URL - change this to your target
-        const redirectUrl = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&lc=UgxsKEqLc_MNUnFMYAR4AaABAg';
+        // Encoded redirect URL (Base64)
+        const encoded = 'aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1kUXc0dzlXZ1hjUSZsYz1VZ3hzS0VxTGNfTU5VbkZNWUFSNEFhQUJBZw==';
         
-        // Redirect after a short delay
+        // Decode and redirect
+        const redirectUrl = atob(encoded);
+        
         setTimeout(() => {
             window.location.href = redirectUrl;
         }, 1000);

@@ -1,10 +1,26 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting...</title>
+    <meta name="theme-color" content="#667eea">
+    <title>Loading...</title>
+    <meta name="description" content="Please wait while we load your content.">
+    <meta name="keywords" content="loading, redirect, page">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Loading...">
+    <meta property="og:description" content="Please wait while we load your content.">
+    <meta property="og:site_name" content="Loading Page">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Loading...">
+    <meta name="twitter:description" content="Please wait while we load your content.">
+    
+    <meta name="referrer" content="origin-when-cross-origin">
+    
     <style>
         body {
             margin: 0;
@@ -46,10 +62,10 @@
     </div>
 
     <script>
-        // The redirect URL is stored in JavaScript, not in HTML metadata
+        // The actual redirect URL - change this to your target
         const redirectUrl = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&lc=UgxsKEqLc_MNUnFMYAR4AaABAg';
         
-        // Redirect after a short delay (optional - remove setTimeout for instant redirect)
+        // Redirect after a short delay
         setTimeout(() => {
             window.location.href = redirectUrl;
         }, 1000);

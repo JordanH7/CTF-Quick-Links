@@ -3,74 +3,409 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#667eea">
-    <title>Loading...</title>
-    <meta name="description" content="Please wait while we load your content.">
-    <meta name="keywords" content="loading, redirect, page">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Loading...">
-    <meta property="og:description" content="Please wait while we load your content.">
-    <meta property="og:site_name" content="Loading Page">
-    
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Loading...">
-    <meta name="twitter:description" content="Please wait while we load your content.">
-    
-    <meta name="referrer" content="origin-when-cross-origin">
-    
+    <meta name="theme-color" content="#0a0e27">
+    <title>CTF Resources Hub - Free Tools & Guides</title>
+    <meta name="description" content="Essential resources and tools for CTF competitions">
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0e27;
+            color: #00ff41;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(90deg, rgba(0,255,65,0.03) 1px, transparent 1px),
+                linear-gradient(rgba(0,255,65,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        nav {
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #00ff41;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+            position: relative;
+            z-index: 10;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #00ff41;
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo::before {
+            content: '>';
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: #00ff41;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s;
+            padding: 5px 10px;
+            border: 1px solid transparent;
+        }
+        
+        .nav-links a:hover {
+            border: 1px solid #00ff41;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+        }
+        
+        main {
+            flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            padding: 50px 20px;
+            position: relative;
+            z-index: 1;
         }
+        
         .container {
+            max-width: 900px;
+            width: 100%;
+        }
+        
+        .header {
             text-align: center;
-            color: white;
+            margin-bottom: 40px;
         }
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top-color: white;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
+        
+        .header h1 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
         }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 10px rgba(0, 255, 65, 0.3); }
+            to { text-shadow: 0 0 20px rgba(0, 255, 65, 0.8); }
         }
-        h1 {
-            font-size: 24px;
-            font-weight: 600;
-            margin: 0;
+        
+        .header p {
+            color: #6bffb8;
+            font-size: 16px;
+        }
+        
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .resource-card {
+            background: rgba(0, 255, 65, 0.05);
+            border: 1px solid #00ff41;
+            border-radius: 10px;
+            padding: 25px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .resource-card:hover {
+            background: rgba(0, 255, 65, 0.1);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .resource-card h3 {
+            color: #00ff41;
+            margin-bottom: 10px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .resource-card p {
+            color: #6bffb8;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        
+        .featured-resource {
+            background: rgba(0, 255, 65, 0.08);
+            border: 2px solid #00ff41;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .featured-resource::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 65, 0.1), transparent);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .featured-resource .content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .featured-badge {
+            display: inline-block;
+            background: #00ff41;
+            color: #0a0e27;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .featured-resource h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #00ff41;
+        }
+        
+        .featured-resource p {
+            color: #6bffb8;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .access-btn {
+            background: #00ff41;
+            color: #0a0e27;
+            border: none;
+            padding: 15px 40px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.4);
+        }
+        
+        .access-btn:hover {
+            background: #6bffb8;
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.6);
+        }
+        
+        .access-btn:active {
+            transform: scale(0.98);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #6bffb8;
+            font-size: 12px;
+            border-top: 1px solid rgba(0, 255, 65, 0.2);
+            position: relative;
+            z-index: 10;
+        }
+        
+        .terminal-text {
+            font-family: 'Courier New', monospace;
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-links {
+                gap: 15px;
+            }
+            
+            .header h1 {
+                font-size: 28px;
+            }
+            
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <div class="spinner"></div>
-        <h1>Redirecting...</h1>
-    </div>
+<body oncontextmenu="return false;">
+    <nav>
+        <div class="logo">CTF_RESOURCES.hub</div>
+        <div class="nav-links">
+            <a href="#" onclick="return false;">Tools</a>
+            <a href="#" onclick="return false;">Guides</a>
+            <a href="#" onclick="return false;">Writeups</a>
+            <a href="#" onclick="return false;">Community</a>
+        </div>
+    </nav>
+    
+    <main>
+        <div class="container">
+            <div class="header">
+                <h1>>>> CTF RESOURCE HUB <<<</h1>
+                <p class="terminal-text">Your one-stop shop for CTF tools, guides, and resources</p>
+            </div>
+            
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <h3>🔐 Crypto Tools</h3>
+                    <p>Collection of cryptography utilities including hash crackers, cipher tools, and encoding utilities</p>
+                </div>
+                
+                <div class="resource-card">
+                    <h3>🌐 Web Exploits</h3>
+                    <p>SQL injection, XSS, and CSRF cheat sheets with practical examples and payloads</p>
+                </div>
+                
+                <div class="resource-card">
+                    <h3>🔍 Forensics Kit</h3>
+                    <p>Steganography tools, memory analysis utilities, and file carving resources</p>
+                </div>
+                
+                <div class="resource-card">
+                    <h3>⚙️ Binary Reversing</h3>
+                    <p>Disassemblers, debuggers, and comprehensive guides for reverse engineering</p>
+                </div>
+            </div>
+            
+            <div class="featured-resource">
+                <div class="content">
+                    <span class="featured-badge">★ EXCLUSIVE ACCESS ★</span>
+                    <h2>Premium CTF Challenge Database</h2>
+                    <p class="terminal-text">
+                        Access our curated collection of 500+ CTF challenges with detailed writeups,<br>
+                        video walkthroughs, and downloadable practice environments.<br>
+                        <strong>Perfect for ACM CTF 2025 preparation!</strong>
+                    </p>
+                    <button class="access-btn" onmousedown="handleAccess(event)">
+                        [ ACCESS DATABASE ]
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p class="terminal-text">
+            > Built by the CTF community, for the CTF community<br>
+            > Last updated: 2025-10-24 | Challenges: 500+ | Active Users: 12.4K
+        </p>
+    </footer>
 
     <script>
-        // Encoded redirect URL (Base64)
-        const encoded = 'aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1kUXc0dzlXZ1hjUSZsYz1VZ3hzS0VxTGNfTU5VbkZNWUFSNEFhQUJBZw==';
+        // Disable right-click
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+        });
         
-        // Decode and redirect
-        const redirectUrl = atob(encoded);
+        // Disable common keyboard shortcuts for dev tools and inspect
+        document.addEventListener('keydown', function(e) {
+            // F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U, Ctrl+Shift+C
+            if (e.keyCode === 123 || 
+                (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) ||
+                (e.ctrlKey && e.keyCode === 85)) {
+                e.preventDefault();
+                return false;
+            }
+        });
         
-        setTimeout(() => {
-            window.location.href = redirectUrl;
-        }, 1000);
+        // Disable text selection on links
+        document.querySelectorAll('a').forEach(function(link) {
+            link.addEventListener('mousedown', function(e) {
+                e.preventDefault();
+            });
+        });
+        
+        // Add click handlers to resource cards - all lead to the same place
+        document.querySelectorAll('.resource-card').forEach(function(card) {
+            card.addEventListener('click', function(e) {
+                handleAccess(e);
+            });
+        });
+        
+        // Make nav links also redirect
+        document.querySelectorAll('.nav-links a').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                handleAccess(e);
+                return false;
+            });
+        });
+        
+        function handleAccess(event) {
+            if (event) {
+                event.preventDefault();
+            }
+            
+            // Redirect to the URL
+            window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&lc=UgxsKEqLc_MNUnFMYAR4AaABAg';
+            
+            return false;
+        }
+        
+        // Prevent dragging the button
+        document.querySelector('.access-btn').addEventListener('dragstart', function(e) {
+            e.preventDefault();
+            return false;
+        });
     </script>
 </body>
 </html>
